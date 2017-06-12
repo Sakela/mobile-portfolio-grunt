@@ -1,0 +1,32 @@
+{
+  "name": "mobile-portfolio-grunt",
+  "version": "1.0.0",
+  "description": "grunt optimization of udacity course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/udacity/frontend-nanodegree-mobile-portfolio.git"
+  },
+  "keywords": [
+    "grunt",
+    "optimization",
+    "udacity",
+    "portfolio"
+  ],
+  "author": "IgorSakelari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/udacity/frontend-nanodegree-mobile-portfolio/issues"
+  },
+  "homepage": "https://github.com/udacity/frontend-nanodegree-mobile-portfolio#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}
