@@ -36,6 +36,21 @@ module.exports = function(grunt) {
                 src: ['src/views/css/style.css', 'src/views/css/bootstrap-grid.css'],
                 dest: 'dist/views/css/styles.css'
             }
+        },
+        cssmin: {
+            target: {
+                files: {
+                    'dist/css/style.min.css' : ['src/css/style.css']
+                }
+            }
+        },
+        uglify: {
+            my_target: {
+                files: {
+                    'dist/js/perfmatters.min.js': ['src/js/perfmatters.js'],
+                    'dist/views/js/main.min.js' : ['src/views/js/main.js']
+                }
+            }
         }
     });
 
@@ -43,7 +58,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('default', ['imagemin','jshint','concat','watch']);
+
+    grunt.registerTask('default', ['imagemin','jshint','concat', 'uglify', 'cssmin','watch']);
 
 };
