@@ -559,5 +559,5 @@ document.addEventListener('DOMContentLoaded', function() {
   items = getDomNodeArray('.mover');
   console.log(items);
 
-  updatePositions();
+  // updatePositions();
 });
