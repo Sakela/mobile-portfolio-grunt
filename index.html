@@ -3,15 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content=" FILL ME IN ">
-    <meta name="author" content=" FILL ME IN ">
+    <meta name="description" content="Portfolio Optimization, Project 4">
+    <meta name="author" content="Igor Sakelari">
     <title>Cameron Pittman: Portfolio</title>
 
-    <link href="dist/css/style.min.css" rel="stylesheet">
-    <link href="src/css/print.css" rel="stylesheet" media="print">
-
-    <script async src="https://www.google-analytics.com/analytics.js"></script>
-    <script async src="src/js/perfmatters.js"></script>
+    <link href="dist/css/style.min.css?__inline=true" rel="stylesheet">
+    <link href="dist/css/print.min.css?__inline=true" rel="stylesheet" media="print">
   </head>
 
   <body>
@@ -58,14 +55,18 @@
       </footer>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-
+    <!-- Asynchronously load Google Web Fonts -->
     <script>
-    WebFont.load({
+    WebFontConfig = {
         google: {
-            families: ['Open Sans:400,700']
+          families: ['Open Sans:400,700']
         }
-    });
+      };
+      (function(d) {
+         var wf = d.createElement('script'), s = d.scripts[0];
+         wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+         s.parentNode.insertBefore(wf, s);
+      })(document);
     </script>
 
     <script>
@@ -76,5 +77,9 @@
       ga('create', 'UA-XXXX-Y');
       ga('send', 'pageview');
     </script>
+
+    <!-- Added async attribute to scripts and load them asynchronously and avoid render blocking -->
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    <script async src="dist/js/perfmatters.min.js"></script>
   </body>
 </html>

@@ -7,22 +7,8 @@
     <meta name="author" content=" FILL ME IN ">
     <title>Cameron Pitman: Portfolio</title>
 
-    <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
-    <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
-
-    <link href="src/css/style.css" rel="stylesheet">
-    <link href="src/css/print.css" rel="stylesheet">
-
-    <script>
-      (function(w,g){w['GoogleAnalyticsObject']=g;
-      w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
-
-      // Optional TODO: replace with your Google Analytics profile ID.
-      ga('create', 'UA-XXXX-Y');
-      ga('send', 'pageview');
-    </script>
-    <script src="http://www.google-analytics.com/analytics.js"></script>
-    <script async src="src/js/perfmatters.js"></script>
+    <link href="dist/css/style.min.css?__inline=true" rel="stylesheet">
+    <link href="dist/css/print.min.css?__inline=true" rel="stylesheet" media="print">
   </head>
 
   <body>
@@ -49,5 +35,32 @@
     <footer>
       <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
     </footer>
+
+    <!-- Asynchronously load Google Web Fonts -->
+    <script>
+    WebFontConfig = {
+        google: {
+          families: ['Open Sans:400,700']
+        }
+      };
+      (function(d) {
+         var wf = d.createElement('script'), s = d.scripts[0];
+         wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+         s.parentNode.insertBefore(wf, s);
+      })(document);
+    </script>
+
+    <script>
+      (function(w,g){w['GoogleAnalyticsObject']=g;
+      w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
+
+      // Optional TODO: replace with your Google Analytics profile ID.
+      ga('create', 'UA-XXXX-Y');
+      ga('send', 'pageview');
+    </script>
+
+    <!-- Added async attribute to scripts and load them asynchronously and avoid render blocking -->
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    <script async src="dist/js/perfmatters.min.js"></script>
   </body>
 </html>
