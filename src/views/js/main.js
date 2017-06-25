@@ -475,9 +475,13 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var randomPizzaNode = document.getElementById("randomPizzas");
+// var randomPizzaArray = [];
+
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
-  pizzasDiv.appendChild(pizzaElementGenerator(i));
+  var randomPizza = pizzaElementGenerator(i);
+  // randomPizzaArray.push(randomPizza);
+  randomPizzaNode.appendChild(randomPizza);
 }
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
@@ -548,10 +552,12 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var movingPizzas = document.querySelector("#movingPizzas1");
+  var elemNodeArr = [];
   for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
+    elemNodeArr.push(elem);
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
@@ -559,6 +565,5 @@ document.addEventListener('DOMContentLoaded', function() {
     movingPizzas.appendChild(elem);
   }
   items = getDomNodeArray('.mover');
-  console.log(items);
   window.requestAnimationFrame(updatePositions);
 });
