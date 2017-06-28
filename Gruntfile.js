@@ -21,27 +21,19 @@ module.exports = function(grunt) {
         },
         watch: {
             scripts: {
-                files: ['src/js/*.js', 'src/views/js/*.js', 'Gruntfile.js'],
-                tasks: ['jshint', 'uglify'],
+                files: ['src/js/*.js', 'src/views/js/*.js', 'Gruntfile.js', 'src/css/style.css', 'src/css/print.css', 'src/views/css/style.css'],
+                tasks: ['jshint', 'uglify', 'cssmin'],
                 options: {
                     spawn: false
                 }
-            }
-        },
-        concat: {
-            options: {
-                separator: ';'
-            },
-            dist: {
-                src: ['src/views/css/style.css', 'src/views/css/bootstrap-grid.css'],
-                dest: 'dist/views/css/styles.css'
             }
         },
         cssmin: {
             target: {
                 files: {
                     'dist/css/style.min.css' : ['src/css/style.css'],
-                    'dist/css/print.min.css' : ['src/css/print.css']
+                    'dist/css/print.min.css' : ['src/css/print.css'],
+                    'dist/views/css/styles.min.css' : ['src/views/css/style.css']
                 }
             }
         },
@@ -58,11 +50,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
 
-    grunt.registerTask('default', ['imagemin','jshint','concat', 'uglify', 'cssmin','watch']);
+    grunt.registerTask('default', ['imagemin','jshint', 'uglify', 'cssmin','watch']);
 
 };

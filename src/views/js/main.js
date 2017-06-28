@@ -373,7 +373,12 @@ var pizzaElementGenerator = function(i) {
   pizzaDescriptionContainer = document.createElement("div");
 
   pizzaContainer.classList.add("randomPizzaContainer");
-  pizzaContainer.style.width = "33.33%";
+  if (window.innerWidth < 700) {
+      pizzaContainer.style.width = "100%";
+  } else {
+      pizzaContainer.style.width = "33.33%";
+  }
+
   pizzaContainer.style.height = "325px";
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
   pizzaImageContainer.style.width="35%";
@@ -508,30 +513,22 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
-var items;
-
-function getDomNodeArray(selector) {
-  // get the elements as a DOM collection
-  var elemCollection = document.querySelectorAll(selector);
-
-  // coerce the DOM collection into an array
-  var elemArray = Array.prototype.slice.apply(elemCollection);
-
-  return elemArray;
-}
 
 function updatePositions() {
   frame++;
-  window.performance.mark("mark_start_frame");
 
-  // var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
 
-  var scrollTop = document.body.scrollTop;
+  var scrollTop = document.body.scrollTop /1250;
 
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  var itemsLength = items.length;
+
+  for (var i = 0; i < itemsLength; i++) {
+    var phase = Math.sin(scrollTop + (i % 5)) * 100;
+    items[i].style.left = items[i].basicLeft + phase + 'px';
   }
+
+  window.performance.mark("mark_start_frame");
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -552,18 +549,19 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var movingPizzas = document.querySelector("#movingPizzas1");
-  var elemNodeArr = [];
-  for (var i = 0; i < 200; i++) {
+  // Calculates number of pizzas needed to fill the browser window.
+  var pizzaNum = (window.innerHeight / 50) + (window.innerWidth / 75);
+  for (var i = 0; i < pizzaNum; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
-    elemNodeArr.push(elem);
-    elem.style.height = "100px";
-    elem.style.width = "73.333px";
+    // elem.style.height = "100px";
+    // elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     movingPizzas.appendChild(elem);
   }
-  items = getDomNodeArray('.mover');
-  window.requestAnimationFrame(updatePositions);
+
+  updatePositions();
+
 });
