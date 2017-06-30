@@ -30,9 +30,9 @@ function loadPizzas () {
     return randomPizzaArray;
 }
 
-imageWorker.postMessage({'pizzas': loadPizzas, 'imageData': imageData});
+worker.postMessage({'pizzas': loadPizzas, 'imageData': imageData});
 
-imageWorker.onmessage = function(e) {
+worker.onmessage = function(e) {
     console.log(e.data);
 };
 
