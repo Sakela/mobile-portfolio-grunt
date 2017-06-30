@@ -17,7 +17,7 @@ cameron *at* udacity *dot* com
 */
 
 var worker = new Worker('js/loadContent.js');
-var imageData = document.getElementById("randomPizzas");
+// var imageData = document.getElementById("randomPizzas");
 
 function loadPizzas () {
 
@@ -27,7 +27,7 @@ function loadPizzas () {
       randomPizzaArray.push(randomPizza);
     }
 
-    worker.postMessage({'pizzas': randomPizzaArray, 'imageData': imageData});
+    worker.postMessage({'pizzas': randomPizzaArray});
 
     worker.onmessage = function(e) {
         console.log(e.data);
