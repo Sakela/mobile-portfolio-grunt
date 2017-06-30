@@ -27,14 +27,14 @@ function loadPizzas () {
       randomPizzaArray.push(randomPizza);
     }
 
-    return randomPizzaArray;
+    worker.postMessage({'pizzas': randomPizzaArray, 'imageData': imageData});
+
+    worker.onmessage = function(e) {
+        console.log(e.data);
+    };
 }
 
-worker.postMessage({'pizzas': loadPizzas, 'imageData': imageData});
 
-worker.onmessage = function(e) {
-    console.log(e.data);
-};
 
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
@@ -500,14 +500,16 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-var randomPizzaNode = document.getElementById("randomPizzas");
-// var randomPizzaArray = [];
 
-for (var i = 2; i < 100; i++) {
-  var randomPizza = pizzaElementGenerator(i);
-  // randomPizzaArray.push(randomPizza);
-  randomPizzaNode.appendChild(randomPizza);
-}
+// var randomPizzaNode = document.getElementById("randomPizzas");
+//
+// for (var i = 2; i < 100; i++) {
+//   var randomPizza = pizzaElementGenerator(i);
+//   // randomPizzaArray.push(randomPizza);
+//   randomPizzaNode.appendChild(randomPizza);
+// }
+
+loadPizzas();
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
