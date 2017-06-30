@@ -16,6 +16,26 @@ Cameron Pittman, Udacity Course Developer
 cameron *at* udacity *dot* com
 */
 
+var worker = new Worker('js/loadContent.js');
+var imageData = document.getElementById("randomPizzas");
+
+function loadPizzas () {
+
+    var randomPizzaArray = [];
+    for (var i = 2; i < 100; i++) {
+      var randomPizza = pizzaElementGenerator(i);
+      randomPizzaArray.push(randomPizza);
+    }
+
+    return randomPizzaArray;
+}
+
+imageWorker.postMessage({'pizzas': loadPizzas, 'imageData': imageData});
+
+imageWorker.onmessage = function(e) {
+    console.log(e.data);
+};
+
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
 var pizzaIngredients = {};
