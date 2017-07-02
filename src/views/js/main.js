@@ -17,24 +17,22 @@ cameron *at* udacity *dot* com
 */
 
 var worker = new Worker('js/loadContent.js');
-// var imageData = document.getElementById("randomPizzas");
 
-function loadPizzas () {
+worker.onmessage = function(e) {
+    console.log("worker said: " + e.data);
+};
 
-    var randomPizzaArray = [];
-    for (var i = 2; i < 100; i++) {
-      var randomPizza = pizzaElementGenerator(i);
-      randomPizzaArray.push(randomPizza);
-    }
+worker.postMessage("Hello World");
 
-    worker.postMessage({'pizzas': randomPizzaArray});
+function getDomNodeArray(selector) {
+    // get the elements as a DOM collection
+    var elemCollection = document.querySelectorAll(selector);
 
-    worker.onmessage = function(e) {
-        console.log(e.data);
-    };
+    // coerce the DOM collection into an array
+    var elemArray = Array.prototype.slice.apply(elemCollection);
+
+    return elemArray;
 }
-
-
 
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
@@ -393,11 +391,7 @@ var pizzaElementGenerator = function(i) {
   pizzaDescriptionContainer = document.createElement("div");
 
   pizzaContainer.classList.add("randomPizzaContainer");
-  if (window.innerWidth < 700) {
-      pizzaContainer.style.width = "100%";
-  } else {
-      pizzaContainer.style.width = "33.33%";
-  }
+  pizzaContainer.style.width = "33.33%";
 
   pizzaContainer.style.height = "325px";
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
@@ -500,16 +494,24 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var randomPizzaArray = [];
+function loadRandomPizzas() {
+    var randomPizzaNode = document.getElementById("randomPizzas");
 
-// var randomPizzaNode = document.getElementById("randomPizzas");
-//
-// for (var i = 2; i < 100; i++) {
-//   var randomPizza = pizzaElementGenerator(i);
-//   // randomPizzaArray.push(randomPizza);
-//   randomPizzaNode.appendChild(randomPizza);
-// }
 
-loadPizzas();
+    for (var i = 2; i < 200; i++) {
+      var randomPizza = pizzaElementGenerator(i);
+      randomPizzaArray.push(randomPizza);
+      // randomPizzaNode.appendChild(randomPizza);
+    }
+
+    for ( var j = 2; j < randomPizzaArray.length; j++) {
+        var randPiz = randomPizzaArray[j];
+        randomPizzaNode.appendChild(randPiz);
+    }
+}
+
+loadRandomPizzas();
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
@@ -560,7 +562,6 @@ function updatePositions() {
     var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
     logAverageFrame(timesToUpdatePosition);
   }
-  // window.requestAnimationFrame(updatePositions);
 }
 
 // runs updatePositions on scroll
@@ -570,20 +571,28 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  var movingPizzas = document.querySelector("#movingPizzas1");
+  var movingPizzas = document.getElementById("movingPizzas1");
+  var movingPizzasArray = [];
+
   // Calculates number of pizzas needed to fill the browser window.
   var pizzaNum = (window.innerHeight / 50) + (window.innerWidth / 75);
   for (var i = 0; i < pizzaNum; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
-    // elem.style.height = "100px";
-    // elem.style.width = "73.333px";
+    elem.style.height = "100px";
+    elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    movingPizzas.appendChild(elem);
+    // movingPizzas.appendChild(elem);
+    movingPizzasArray.push(elem);
   }
 
-  updatePositions();
+  for (var k = 0; k < movingPizzasArray.length; k++) {
+      var piz = movingPizzasArray[k];
+      movingPizzas.appendChild(piz);
+  }
+  // updatePositions();
+  window.requestAnimationFrame(updatePositions);
 
 });
