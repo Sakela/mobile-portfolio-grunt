@@ -1,6 +1,8 @@
 module.exports = function(grunt) {
 
+    // Initialize tasks
     grunt.initConfig({
+        // All minified image files are saved in dist/ folder
         imagemin: {
             dynamic: {
                 files: [{
@@ -16,9 +18,11 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        // Check all js files for errors before uglify
         jshint: {
             all: ['src/js/*.js', 'src/views/js/*.js', 'Gruntfile.js']
         },
+        // Watch all JS and CSS files for changes and check for errors automatically
         watch: {
             scripts: {
                 files: ['src/js/*.js', 'src/views/js/*.js', 'Gruntfile.js', 'src/css/style.css', 'src/css/print.css', 'src/views/css/style.css'],
@@ -28,15 +32,18 @@ module.exports = function(grunt) {
                 }
             }
         },
+        // Minify css and save to dist/ folder
         cssmin: {
             target: {
                 files: {
                     'dist/css/style.min.css' : ['src/css/style.css'],
                     'dist/css/print.min.css' : ['src/css/print.css'],
-                    'dist/views/css/styles.min.css' : ['src/views/css/style.css']
+                    'dist/views/css/styles.min.css' : ['src/views/css/style.css'],
+                    'dist/views/css/bootstrap-grid-min.css' : ['src/views/css/bootstrap-grid.css']
                 }
             }
         },
+        // Minify JS files
         uglify: {
             my_target: {
                 files: {
@@ -53,7 +60,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-
+    // Register all running tasks
     grunt.registerTask('default', ['imagemin','jshint', 'uglify', 'cssmin','watch']);
 
 };
