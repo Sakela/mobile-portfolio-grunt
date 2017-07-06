@@ -440,23 +440,7 @@ var resizePizzas = function(size) {
 
     changeSliderLabel(size);
 
-    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-    // function determineDx (elem, size) {
-    //   var oldWidth = elem.offsetWidth;
-    //   var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-    //   var oldSize = oldWidth / windowWidth;
-    //
-    //   // Changes the slider value to a percent width
-    //   function sizeSwitcher (size) {
-    //
-    //
-    //   var newSize = sizeSwitcher(size);
-    //   var dx = (newSize - oldSize) * windowWidth;
-    //
-    //   return dx;
-    // }
-
-    // Iterates through pizza elements on the page and changes their widths
+    // Iterates through pizza elements on the page and changes their widths to constant percentage instead of all calculations
     function changePizzaSizes(size) {
         switch(size) {
             case "1":
@@ -472,12 +456,10 @@ var resizePizzas = function(size) {
             console.log("bug in sizeSwitcher");
         }
 
-
+        // Cashe reference before the loop to avoid on searching DOM for container
         var randomPizza = document.querySelectorAll(".randomPizzaContainer");
 
         for (var i = 0; i < randomPizza.length; i++) {
-            //   var dx = determineDx(randomPizza[i], size);
-            //   var newwidth = (randomPizza[i].offsetWidth + dx) + 'px';
             randomPizza[i].style.width = newWidth + "%";
         }
     }
@@ -494,7 +476,6 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-
 var randomPizzaNode = document.getElementById("randomPizzas");
 
 for (var i = 2; i < 200; i++) {
@@ -525,13 +506,14 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
+// Store reference in a variable and call through ClassName instead of query selector as it works faster this way
+var items = document.getElementsByClassName('mover');
+
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
 
-    var items = document.getElementsByClassName('mover');
-
+    //Instead of calculating scrollTop in a loop, excluded it out of there and stored reference in a variable
     var scrollTop = document.body.scrollTop /1250;
-
     var itemsLength = items.length;
 
     for (var i = 0; i < itemsLength; i++) {
@@ -549,24 +531,24 @@ function updatePositions() {
         var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
         logAverageFrame(timesToUpdatePosition);
     }
-    // var raf = requestAnimationFrame(updatePositions);
-    // cancelAnimationFrame(raf);
 }
 
-// runs updatePositions on scroll
+// runs updatePositions on scroll and using RAF
 window.addEventListener('scroll', function() {
     requestAnimationFrame(updatePositions);
 });
 
-//Carried out of the function unnecessary variable calls
+//Carried out of the function and created an array to store image DOM nodes instead of extra load those calculations in Event listener later
 var cols = 8;
 var s = 256;
 var pizzaArr = [];
 
-// Cached pizzas into an array to avoid all the calcualtions in onload function and calculate amount of pizzas necessary to fill the screen
-var pizzaNum = (window.innerHeight / 50) + (window.innerWidth / 75);
+// Cached pizzas into an array to avoid all the calcualtions in onload function
 
-for (var i = 0; i < pizzaNum; i++) {
+// Counting number of pizzas that can fit in the screen caused FSL onload of the page
+// var pizzaNum = (window.innerHeight / 50) + (window.innerWidth / 75);
+
+for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "../../dist/views/images/pizza-min.png";
@@ -587,7 +569,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     requestAnimationFrame(updatePositions);
-    // requestAnimationFrame(updatePositions);
+    // updatePositions
     // setInterval(updatePositions, 1000/60);
 
 });
