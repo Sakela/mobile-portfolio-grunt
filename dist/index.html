@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio Optimization, Project 4">
+    <meta name="author" content="Igor Sakelari">
+    <title>Cameron Pittman: Portfolio</title>
+
+    <!-- Inlined and minified CSS to avoid render blocking CSS queries and optimize page speed load -->
+    <style>html{font-size:100%;overflow-y:scroll;-webkit-tap-highlight-color:transparent;-ms-text-size-adjust:100%;-webkit-text-size-adjust:none}body{margin:0;font-size:14px;line-height:1.61;font-weight:400;font-family:'Open Sans',sans-serif}a:visited{color:#61c}a:focus{outline:thin dotted}a:active,a:hover{color:#c00;outline:0}.bold{font-weight:700}code,pre{font-family:monospace,monospace;font-size:1em}ol,ul{margin:1em 0;padding:0 0 0 20px}img{border:0;max-width:100%}.container{max-width:45em;margin:0 auto}header{padding:0 .5em;color:#c90b0b}header img{border-radius:40px;float:left}header p{font-size:1.5em;padding-left:4em}header p span{font-size:.8em;font-weight:400}.hero{padding:2em;background-color:#f8f8f8;font-size:1.2em;border-bottom:1px solid #ccc;border-top:1px solid #ccc}.content{padding:1em 1em}.content li{list-style-type:none;font-size:1.1em}li img{float:left;padding-right:1em}li p{font-size:.9em;font-style:italic}footer{padding:0 .5em;border-top:1px solid #ccc}footer span{float:right;font-style:italic}@media only screen and (max-width:480px){body{font-size:20px}header p{padding-left:4.5em}}</style>
+
+    <!-- Add attribute media print to avoid render blocking and trigger this tag only for printing needs -->
+    <link href="css/print.min.css" rel="stylesheet" media="print">
+</head>
+
+<!-- All images are minified using grunt-imagemin,optipng and jpegtran -->
+<body>
+    <header class="container">
+        <a href="/"><img src="img/profilepic-min.jpg"></a>
+        <p class="bold">Cameron Pittman<br><span>Course Developer</span></p>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <span class="bold">I love web development!</span> This is a template for a simple portfolio. I decided to use it to showcase a few Udacity courses I've taken and some teaching work, but you can use it to showcase any kind of project that you want the world to see :) <br> Contact me: me@email.com
+        </div>
+
+        <div class="content">
+            <ul>
+                <li>
+                    <img src="https://lh4.ggpht.com/kJEnfqhPvtm4m3EneSZ4fWYGS8lW4YNhEjk6zPkyrQaBUHc-2Y_ElDic99NHI0h-UBLXVbRCjFybFvrWxdk=s100">
+                    <a href="project-2048.html">Build Your Own 2048!</a>
+                    <p>I made my own version of 2048. How cool is that!?</p>
+                </li>
+
+                <li>
+                    <img src="https://lh6.ggpht.com/f_0W8h__3G99CWTjnMjD8BUKm7yp2-wJyApLtTwFoFtlal2ULf_JgHIsOQq2NiYfKOdMlXlMHDKNo5XVZLs=s100">
+                    <a href="project-webperf.html">Website Performance Optimization</a>
+                    <p>Hey... this class looks familiar.</p>
+                </li>
+
+                <li>
+                    <img src="https://lh5.ggpht.com/IKdCmTWn8a2nMhlwMYzryvzRN5CUZAOBr4tDrEAbszV7TIFe9pRAInA4kkYcgTXwrifJsBEsq1agTueuu-g=s100">
+                    <a href="project-mobile.html">Mobile Web Development</a>
+                    <p>Making mobile apps isn't so hard after all.</p>
+                </li>
+
+                <li>
+                    <img style="width: 100px;" src="views/images/pizzeria-main-min.jpg">
+                    <a href="views/pizza.html">Cam's Pizzeria</a>
+                    <p>Who wants a performant pizza?</p>
+                </li>
+            </ul>
+        </div>
+
+        <footer class="container">
+            <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
+        </footer>
+    </div>
+
+    <!-- Asynchronously load Google Web Fonts -->
+    <script>
+    WebFontConfig = {
+        google: {
+            families: ['Open Sans:400,700']
+        }
+    };
+    (function(d) {
+        var wf = d.createElement('script'), s = d.scripts[0];
+        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+        s.parentNode.insertBefore(wf, s);
+    })(document);
+    </script>
+
+    <script>
+    (function(w,g){w['GoogleAnalyticsObject']=g;
+    w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
+
+    // Optional TODO: replace with your Google Analytics profile ID.
+    ga('create', 'UA-XXXX-Y');
+    ga('send', 'pageview');
+    </script>
+
+    <!-- Added async attribute to scripts and load them asynchronously and avoid render blocking -->
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    <script async src="js/perfmatters.min.js"></script>
+</body>
+</html>

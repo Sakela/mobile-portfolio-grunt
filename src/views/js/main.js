@@ -16,24 +16,6 @@ Cameron Pittman, Udacity Course Developer
 cameron *at* udacity *dot* com
 */
 
-// var worker = new Worker('js/loadContent.js');
-//
-// worker.onmessage = function(e) {
-//     console.log("worker said: " + e.data);
-// };
-//
-// worker.postMessage("Hello World");
-//
-// function getDomNodeArray(selector) {
-//     // get the elements as a DOM collection
-//     var elemCollection = document.querySelectorAll(selector);
-//
-//     // coerce the DOM collection into an array
-//     var elemArray = Array.prototype.slice.apply(elemCollection);
-//
-//     return elemArray;
-// }
-
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
 var pizzaIngredients = {};
@@ -534,9 +516,7 @@ function updatePositions() {
 }
 
 // runs updatePositions on scroll and using RAF
-window.addEventListener('scroll', function() {
-    requestAnimationFrame(updatePositions);
-});
+window.addEventListener('scroll', updatePositions);
 
 //Carried out of the function and created an array to store image DOM nodes instead of extra load those calculations in Event listener later
 var cols = 8;
@@ -568,8 +548,8 @@ document.addEventListener('DOMContentLoaded', function() {
         movingPizzas.appendChild(elem);
     }
 
-    requestAnimationFrame(updatePositions);
-    // updatePositions
+    // requestAnimationFrame(updatePositions);
+    updatePositions();
     // setInterval(updatePositions, 1000/60);
 
 });
