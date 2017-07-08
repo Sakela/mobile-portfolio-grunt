@@ -525,7 +525,7 @@ var pizzaArr = [];
 
 // Cached pizzas into an array to avoid all the calcualtions in onload function
 
-// Counting number of pizzas that can fit in the screen caused FSL onload of the page
+// Counting number of pizzas that can fit in the screen caused FSL onload of the page. Did not use this method because calculating DOM nodes in progress causes Reflow(FSL).
 // var pizzaNum = (window.innerHeight / 50) + (window.innerWidth / 75);
 
 for (var i = 0; i < 200; i++) {

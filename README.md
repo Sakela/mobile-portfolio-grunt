@@ -19,10 +19,15 @@ $ git clone https://github.com/Sakela/mobile-portfolio-grunt.git
 To work with Grunt you will need to use Node Package Manager (NPM) that you can use by downloading [NodeJS](https://nodejs.org/en/).
 You can learn on how to get started with [Grunt here](https://gruntjs.com/getting-started)
 ```sh
-npm install -g grunt-cli                   //Install Grunt globally
-npm install grunt-contrib-watch(example)   //Install dependencies
-grunt watch                                //To run only one task
-grunt                                      //To run all grunt tasks
+npm install -g grunt-cli                      //Install Grunt CLI globally
+npm install grunt --save-dev                  //Install grunt
+npm install grunt-contrib-imagemin --save-dev //Install dependencies
+npm install grunt-contrib-cssmin --save-dev   
+npm install grunt-contrib-jshint --save-dev   
+npm install grunt-contrib-uglify --save-dev    
+npm install grunt-contrib-watch --save-dev    
+grunt watch                                   //To run only one task
+grunt                                         //To run all grunt tasks
 ```
 #### Tasks ran with Grunt
 - imagemin (minify all images)
@@ -55,8 +60,8 @@ I tried avoid changing in the initial project, such as number of pizzas on load 
 
  * Firstly, to get the time on resizing pizzas, I updated the ```changePizzaSizes(size)``` so that it takes simply the width it needs and sets it to percentage ( instead of all unnecessary calculations it did). Thanks to Cam and quiz 10.
 
- * Throughout optimizations in ```main.js``` I excluded out of the loop all possible DOM queries and instead of making calculations in the loop I tried saved precalculated results in variables. So for example it iterates through an array instead of creating each time image element, add class .mover and then append it. All these steps helped me unload the function that listened to DOMContentLoad.
+ * Throughout optimizations in ```main.js``` I excluded out of the loop all possible DOM queries and instead of making calculations in the loop I tried save precalculated results in variables. So for example it iterates through an array instead of creating each loop image element, add class .mover and then append it. All these steps helped me unload the function that listened to DOMContentLoad.
 
- * Applied RAF to get smooth animation and looked for best ways to store reference to DOM nodes, such as ```document.getElementsByClassName``` etc.
+ * Looked for best ways to store reference to DOM nodes, such as ```document.getElementsByClassName``` etc.
 
  * Added ```will-transform``` property to .mover class, so that they take their own layer and do not cause the whole page to repaint.
