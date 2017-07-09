@@ -439,7 +439,7 @@ var resizePizzas = function(size) {
         }
 
         // Cashe reference before the loop to avoid on searching DOM for container
-        var randomPizza = document.querySelectorAll(".randomPizzaContainer");
+        var randomPizza = document.getElementsByClassName("randomPizzaContainer");
 
         for (var i = 0; i < randomPizza.length; i++) {
             randomPizza[i].style.width = newWidth + "%";
@@ -460,7 +460,7 @@ window.performance.mark("mark_start_generating"); // collect timing data
 // This for-loop actually creates and appends all of the pizzas when the page loads
 var randomPizzaNode = document.getElementById("randomPizzas");
 
-for (var i = 2; i < 200; i++) {
+for (var i = 2; i < 100; i++) {
     var randomPizza = pizzaElementGenerator(i);
     randomPizzaNode.appendChild(randomPizza);
 }
@@ -521,14 +521,19 @@ window.addEventListener('scroll', updatePositions);
 //Carried out of the function and created an array to store image DOM nodes instead of extra load those calculations in Event listener later
 var cols = 8;
 var s = 256;
+var height = window.screen.height;
+var rows = height / s;
+console.log(rows);
 var pizzaArr = [];
 
 // Cached pizzas into an array to avoid all the calcualtions in onload function
 
-// Counting number of pizzas that can fit in the screen caused FSL onload of the page. Did not use this method because calculating DOM nodes in progress causes Reflow(FSL).
-// var pizzaNum = (window.innerHeight / 50) + (window.innerWidth / 75);
+// Counting number of pizzas that can fit in the screen caused FSL onload of the page.
+var pizzaNum = rows * cols;
+console.log(pizzaNum);
 
-for (var i = 0; i < 200; i++) {
+
+for (var i = 0; i < pizzaNum; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "../../dist/views/images/pizza-min.png";
