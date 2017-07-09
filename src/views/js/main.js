@@ -521,7 +521,8 @@ window.addEventListener('scroll', updatePositions);
 //Carried out of the function and created an array to store image DOM nodes instead of extra load those calculations in Event listener later
 var cols = 8;
 var s = 256;
-var height = window.screen.height;
+//Used clientHeight instead of window.screen.height because only clientHeight generates enough pizzas for mobile version of the page
+var height = document.documentElement.clientHeight;
 var rows = height / s;
 console.log(rows);
 var pizzaArr = [];
