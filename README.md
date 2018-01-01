@@ -1,4 +1,4 @@
-# Website Optimization Portfolio with Grunt
+# Website Optimization (Udacity Front-End Project 5)
 The goal of this project was to optimize very slow website portfolio using techniques learnt in the course.
 - Optimize CRP and avoid render blocking scripts
 - Optimize images
